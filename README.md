@@ -2,19 +2,18 @@
 
 ## Описание проекта
 
-Данный проект посвящен автоматизации распознавания болезней культурных растений с помощью AutoML-фреймворков. Целью исследования является сравнение производительности моделей, созданных с помощью AutoKeras и TPOT, на задаче классификации изображений растений по состоянию их листьев.
+Данный проект посвящен автоматизации распознавания болезней культурных растений с помощью AutoML-фреймворков. Целью исследования является сравнение производительности моделей, созданных с помощью AutoKeras, lightAutoML, кастомной модели и кастомной модели с использованием Keras-tuner на задаче классификации изображений растений по состоянию их листьев.
 
 Проект включает:
 * Предобработку данных из изображений или формата .npz.
-* Обучение моделей с использованием AutoML-фреймворков.
-* Сравнение точности предсказаний моделей TPOT и AutoKeras.
-
+* Обучение моделей с использованием AutoML-фреймворков и кастомных подходов.
+* Сравнение точности предсказаний различных моделей.
 
 ## Используемые инструменты
 
 * Python 3.8+
 * AutoKeras
-* TPOT
+* lightAutoML
 * TensorFlow
 * Scikit-learn
 * OpenCV
@@ -41,7 +40,7 @@
 git clone https://github.com/Gennod/kursovaya.git cd ваш-репозиторий
 ```
 
-2. 
+2. Установите зависимости:
 
 ```
 pip install -r requirements.txt
@@ -55,13 +54,6 @@ pip install -r requirements.txt
 * medium (128x128) https://drive.google.com/file/d/1VrMftJvF3VuUt-k3yNPCChR9qi0GcKKe/view?usp=sharing
 * big (255*255) https://drive.google.com/file/d/1G2iGRaYnffXltUB-Fh-L5Z5sL2we3zeZ/view?usp=sharing
 
-### Обработка данных
-
-Для предобработки данных:
-
-* Если у вас папка с изображениями, измените параметр DATA_DIR в файле test_models.py на путь к папке с изображениями.
-* Если у вас файл .npz, укажите путь в параметре NPZ_PATH.
-
 ### Тестирование модели
 
 Запустите файл test_models.py:
@@ -72,33 +64,22 @@ python test_models.py
 
 Скрипт выполнит следующие шаги:
 * Загрузит и обработает данные.
-* Обучит модель AutoKeras.
-* Обучит модель TPOT.
-* Выведет результаты сравнения точности моделей
+* Протестирует модели (кастомную, AutoKeras, lightAutoML и кастомную модель с Keras-tuner).
+* Выведет результаты сравнения точности моделей.
 
-## Результаты
+## Остальные модели
 
-Результаты работы TPOT:
-* Лучший пайплайн будет сохранен в models/tpot_best_pipeline.py
-
-Результаты работы AutoKeras:
-* Лучшая модель будет сохранена в models/corn_disease_classifier.keras
-
-Пример логов работы скрипта:
-
-```
-AutoKeras Test Accuracy: 0.9123
-TPOT Test Accuracy: 0.8956
-Comparison - AutoKeras Accuracy: 0.9123, TPOT Accuracy: 0.8956
-```
+Keras-Tuner: https://drive.google.com/file/d/1OKa9gNoVn49RMHALE177Fl4FNjcbGk1_/view?usp=sharing
+lightAutoML: https://drive.google.com/file/d/1zvizShFlmKLG5DOxI37M4o84A1vpTCnX/view?usp=sharing
+AutoKeras: https://drive.google.com/file/d/1apgBqN9Uls9yqxdG0v14q416j3Ods0n4/view?usp=sharing
 
 ## Структура проекта
+
 
 ```
 ├── data/                           # Папка с данными
 ├── models/                         # Сохраненные модели и пайплайны
 │   ├── corn_disease_classifier.keras
-│   ├── tpot_best_pipeline.py
 ├── code/
 │   ├── requirements.txt            # Зависимости проекта
 │   ├── test_models.py              # Основной скрипт для тестирования
